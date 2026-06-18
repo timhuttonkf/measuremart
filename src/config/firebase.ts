@@ -1,0 +1,76 @@
+/**
+ * Firebase configuration and service initialisation.
+ *
+ * SETUP: Replace the placeholder values below with your real Firebase config.
+ * Find these in the Firebase Console → Project Settings → Your apps.
+ *
+ * The project used here is: kingfisher-group-measurement
+ */
+
+import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
+import {
+  getAnalytics,
+  logEvent as firebaseLogEvent,
+  Analytics,
+  isSupported,
+} from 'firebase/analytics';
+
+const firebaseConfig = {
+  apiKey: 'YOUR_API_KEY',
+  authDomain: 'kingfisher-group-measurement.firebaseapp.com',
+  projectId: 'kingfisher-group-measurement',
+  storageBucket: 'kingfisher-group-measurement.appspot.com',
+  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+  appId: 'YOUR_APP_ID',
+  measurementId: 'YOUR_MEASUREMENT_ID', // G-XXXXXXXXXX — used for GA4
+};
+
+// Prevent duplicate initialisation when the module is hot-reloaded in Expo
+const app: FirebaseApp =
+  getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+export const auth: Auth = getAuth(app);
+export const db: Firestore = getFirestore(app);
+
+/**
+ * Analytics is only available on native (iOS/Android) and modern browsers.
+ * We initialise it lazily and expose a safe wrapper so screens don't need
+ * to guard against undefined.
+ */
+let analyticsInstance: Analytics | null = null;
+
+const initAnalytics = async (): Promise<Analytics | null> => {
+  if (analyticsInstance) return analyticsInstance;
+  const supported = await isSupported();
+  if (supported) {
+    analyticsInstance = getAnalytics(app);
+  }
+  return analyticsInstance;
+};
+
+/**
+ * Wrapper around Firebase Analytics logEvent.
+ * All GA4 e-commerce events in this app go through this function so that
+ * analytics calls are silently no-ops in environments where analytics is
+ * unavailable (e.g. simulators without Google Play Services).
+ */
+export const logEvent = async (
+  eventName: string,
+  params?: Record<string, unknown>
+): Promise<void> => {
+  try {
+    const analytics = await initAnalytics();
+    if (analytics) {
+      firebaseLogEvent(analytics, eventName, params);
+    }
+  } catch (e) {
+    // Analytics failures must never crash the app
+    if (__DEV__) {
+      console.log(`[Analytics] ${eventName}`, params);
+    }
+  }
+};
+
+export default app;
