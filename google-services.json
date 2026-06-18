@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "409911639072",
+    "project_id": "kingfisher-group-measurement",
+    "storage_bucket": "kingfisher-group-measurement.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409911639072:android:41a188a72d7971b0139045",
+        "android_client_info": {
+          "package_name": "com.kingfisher.measuremart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409911639072-cpbj70s2rtei1chclhhc117rmocqc3t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrjxtTjI9XR2p_CWQjBNNgsVRpaJpCwkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409911639072-8emqoe2ednto2laf0in6i7q54f5g32s8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "409911639072-325msdjk7kmj2nidsr7pk1te4vsfnvp1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kingfisher.measuremart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

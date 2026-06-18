@@ -18,13 +18,13 @@ import {
 } from 'firebase/analytics';
 
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
+  apiKey: 'AIzaSyDIf-6nEsY8jtMRdaMEpzRmxdPoKqD4aLg',
   authDomain: 'kingfisher-group-measurement.firebaseapp.com',
   projectId: 'kingfisher-group-measurement',
-  storageBucket: 'kingfisher-group-measurement.appspot.com',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
-  measurementId: 'YOUR_MEASUREMENT_ID', // G-XXXXXXXXXX — used for GA4
+  storageBucket: 'kingfisher-group-measurement.firebasestorage.app',
+  messagingSenderId: '409911639072',
+  appId: '1:409911639072:ios:da3e110b52c1fd46139045',
+  measurementId: 'G-LFD0Y10K54', // G-XXXXXXXXXX — used for GA4
 };
 
 // Prevent duplicate initialisation when the module is hot-reloaded in Expo
