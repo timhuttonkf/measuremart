@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "kingfisher-group-measurement"
+  },
+  "targets": {
+    "kingfisher-group-measurement": {
+      "hosting": {
+        "measuremart": [
+          "measuremart"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

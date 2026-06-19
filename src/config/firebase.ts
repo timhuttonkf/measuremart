@@ -1,8 +1,6 @@
 /**
  * Firebase configuration and service initialisation.
  *
- * SETUP: Replace the placeholder values below with your real Firebase config.
- * Find these in the Firebase Console → Project Settings → Your apps.
  *
  * The project used here is: kingfisher-group-measurement
  */
@@ -24,7 +22,7 @@ const firebaseConfig = {
   storageBucket: 'kingfisher-group-measurement.firebasestorage.app',
   messagingSenderId: '409911639072',
   appId: '1:409911639072:ios:da3e110b52c1fd46139045',
-  measurementId: 'G-LFD0Y10K54', // G-XXXXXXXXXX — used for GA4
+  measurementId: 'G-LFD0Y10K54',
 };
 
 // Prevent duplicate initialisation when the module is hot-reloaded in Expo

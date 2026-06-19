@@ -1,5 +1,5 @@
 /**
- * Firebase Analytics event helpers — GA4 e-commerce event specification.
+ * GA4 e-commerce event specification.
  *
  * Every public function in this module corresponds to a standard GA4 event.
  * Keeping all analytics calls here means:
@@ -14,13 +14,8 @@
 import { logEvent } from '../config/firebase';
 import { Product, CartItem, Order } from '../types';
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-
 /**
  * Converts a Product to the GA4 `items` array entry format.
- * GA4 requires item_id, item_name, and price at minimum.
  */
 const toGa4Item = (product: Product, quantity = 1) => ({
   item_id: product.id,
@@ -31,14 +26,9 @@ const toGa4Item = (product: Product, quantity = 1) => ({
   currency: 'GBP',
 });
 
-// ---------------------------------------------------------------------------
-// Screen tracking
-// ---------------------------------------------------------------------------
-
 /**
  * Logs a screen_view event.
- * Call this in a useEffect on every screen component so Firebase reports
- * which screens users visit and how long they spend on each.
+ * Call this in a useEffect on every screen component
  */
 export const logScreenView = (screenName: string, screenClass?: string) => {
   logEvent('screen_view', {
@@ -46,10 +36,6 @@ export const logScreenView = (screenName: string, screenClass?: string) => {
     firebase_screen_class: screenClass ?? screenName,
   });
 };
-
-// ---------------------------------------------------------------------------
-// Product discovery
-// ---------------------------------------------------------------------------
 
 /**
  * view_item_list — fired when a list of products is displayed.
@@ -70,7 +56,6 @@ export const logViewItemList = (
 
 /**
  * view_item — fired when a single product detail page is opened.
- * This is the most important discovery event for understanding product interest.
  */
 export const logViewItem = (product: Product) => {
   const params: Record<string, unknown> = {
@@ -91,13 +76,10 @@ export const logSearch = (searchTerm: string) => {
   logEvent('search', { search_term: searchTerm });
 };
 
-// ---------------------------------------------------------------------------
-// Cart actions
-// ---------------------------------------------------------------------------
 
 /**
  * add_to_cart — fired when the user adds a product to their cart.
- * `value` should equal price × quantity so revenue attribution is accurate.
+ * `value` should equal price × quantity.
  */
 export const logAddToCart = (product: Product, quantity: number) => {
   logEvent('add_to_cart', {
@@ -120,7 +102,6 @@ export const logRemoveFromCart = (product: Product, quantity: number) => {
 
 /**
  * view_cart — fired when the user opens the Cart screen.
- * Helps measure cart abandonment when compared against begin_checkout.
  */
 export const logViewCart = (items: CartItem[]) => {
   const value = items.reduce(
@@ -134,14 +115,9 @@ export const logViewCart = (items: CartItem[]) => {
   });
 };
 
-// ---------------------------------------------------------------------------
-// Checkout funnel
-// ---------------------------------------------------------------------------
-
 /**
  * begin_checkout — fired when the user taps "Proceed to Checkout".
- * Together with view_cart and purchase, this forms the checkout funnel.
- */
+a */
 export const logBeginCheckout = (items: CartItem[], value: number) => {
   logEvent('begin_checkout', {
     currency: 'GBP',
@@ -184,8 +160,8 @@ export const logAddPaymentInfo = (
 
 /**
  * purchase — fired only after a successful payment.
- * This is the most valuable e-commerce event. It includes:
- *   - transaction_id: unique order ID (used for deduplication in GA4)
+ * includes:
+ *   - transaction_id: unique order ID
  *   - value: order total (excluding tax)
  *   - tax: VAT / sales tax amount
  *   - currency: "GBP"
@@ -201,10 +177,6 @@ export const logPurchase = (order: Order) => {
     items: order.items.map((i) => toGa4Item(i.product, i.quantity)),
   });
 };
-
-// ---------------------------------------------------------------------------
-// Authentication
-// ---------------------------------------------------------------------------
 
 /**
  * login — fired when an existing user signs in.

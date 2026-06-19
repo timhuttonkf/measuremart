@@ -1,16 +1,10 @@
-/**
- * Design tokens for MeasureMart.
- * All colours, typography sizes, spacing and radii are defined here so that
- * individual components never hard-code visual values.
- */
-
 export const colors = {
-  primary: '#1A56DB',       // Brand blue — CTAs, active states
-  primaryLight: '#EBF5FF',  // Tinted blue — backgrounds, badges
-  secondary: '#7E3AF2',     // Purple — accents, promotions
-  accent: '#F05252',        // Red — sale prices, error states
-  background: '#F9FAFB',    // App background
-  surface: '#FFFFFF',       // Card / sheet background
+  primary: '#1A56DB',
+  primaryLight: '#EBF5FF',
+  secondary: '#7E3AF2',
+  accent: '#F05252',
+  background: '#F9FAFB',
+  surface: '#FFFFFF',
   textPrimary: '#111928',
   textSecondary: '#6B7280',
   textMuted: '#9CA3AF',
@@ -83,9 +77,7 @@ export const shadows = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// PascalCase aliases (used by new screens / components per spec)
-// ---------------------------------------------------------------------------
+
 export const Colors = {
   ...colors,
   white: '#FFFFFF',

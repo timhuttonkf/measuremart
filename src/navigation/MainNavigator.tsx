@@ -35,9 +35,6 @@ const HomeStack = createNativeStackNavigator();
 const CatStack = createNativeStackNavigator();
 const CartStack = createNativeStackNavigator();
 
-// ---------------------------------------------------------------------------
-// Stack navigators
-// ---------------------------------------------------------------------------
 
 const HomeStackNav = () => (
   <HomeStack.Navigator screenOptions={{ headerShown: false }}>
@@ -67,10 +64,6 @@ const CartStackNav = () => (
   </CartStack.Navigator>
 );
 
-// ---------------------------------------------------------------------------
-// Cart badge component
-// ---------------------------------------------------------------------------
-
 const CartBadge = ({ color }: { color: string }) => {
   const { itemCount } = useCart();
   return (
@@ -85,9 +78,6 @@ const CartBadge = ({ color }: { color: string }) => {
   );
 };
 
-// ---------------------------------------------------------------------------
-// Main tab navigator
-// ---------------------------------------------------------------------------
 
 const MainNavigator = () => (
   <Tab.Navigator

@@ -166,8 +166,7 @@ export const sampleProducts: Product[] = [
     rating: 4.8,
     reviewCount: 523,
     inStock: true,
-    specifications: { Range: '0.05 – 50 m', Accuracy: '±1.5 mm', Bluetooth: 'Bluetooth 4.0', Display: 'Backlit LCD', 'IP Rating': 'IP54', 'Battery life': '10,000 measurements' },
-  },
+    specifications: { Range: '0.05 – 50 m', Accuracy: '±1.5 mm', Bluetooth: 'Bluetooth 4.0', Display: 'Backlit LCD', 'IP Rating': 'IP54', 'Battery life': '10,000 measurements', 'QA Test Note': 'This parameter is intentionally too long and exceeds the 100-character GA4 limit to test how Firebase Analytics handles parameter truncation and validation errors in DebugView' },  },
   {
     id: 'p12',
     name: 'Leica DISTO D510 Laser Distance Measurer',

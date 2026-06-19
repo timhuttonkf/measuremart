@@ -13,7 +13,6 @@
  *
  * Test card behaviour:
  *   Any card number beginning with "1111" is always declined.
- *   This lets QA teams reliably test the declined-card state.
  *   All other card numbers succeed regardless of other fields.
  */
 
@@ -161,7 +160,7 @@ const CheckoutScreen = () => {
     logScreenView('Checkout');
   }, []);
 
-  // ── Step 1: Shipping validation ──────────────────────────────────────────
+  // ── Shipping validation ──────────────────────────────────────────
 
   const validateShipping = (): boolean => {
     const errors: Partial<ShippingAddress> = {};
@@ -181,7 +180,7 @@ const CheckoutScreen = () => {
     setStep(2);
   };
 
-  // ── Step 2: Payment processing ───────────────────────────────────────────
+  // ── Payment processing ───────────────────────────────────────────
 
   const formatCardNumber = (text: string) =>
     text
@@ -266,7 +265,7 @@ const CheckoutScreen = () => {
 
     const fullOrder: Order = { ...order, id: docRef.id };
 
-    // GA4: purchase — the most important e-commerce event
+    // GA4: purchase
     logPurchase(fullOrder);
 
     setOrderId(docRef.id);
@@ -297,7 +296,7 @@ const CheckoutScreen = () => {
 
       <ScrollView contentContainerStyle={styles.body} keyboardShouldPersistTaps="handled">
 
-        {/* ── Step 1: Shipping ── */}
+        {/* ── Shipping ── */}
         {step === 1 && (
           <View>
             <Text style={styles.sectionTitle}>Shipping Address</Text>
@@ -353,7 +352,7 @@ const CheckoutScreen = () => {
           </View>
         )}
 
-        {/* ── Step 2: Payment ── */}
+        {/* ── Payment ── */}
         {step === 2 && (
           <View>
             <Text style={styles.sectionTitle}>Payment Details</Text>
@@ -435,7 +434,7 @@ const CheckoutScreen = () => {
           </View>
         )}
 
-        {/* ── Step 3: Confirmation ── */}
+        {/* ── Confirmation ── */}
         {step === 3 && (
           <View style={styles.confirmation}>
             <View style={styles.successIcon}>

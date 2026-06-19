@@ -87,10 +87,6 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   }
 };
 
-// ---------------------------------------------------------------------------
-// Context
-// ---------------------------------------------------------------------------
-
 interface CartContextValue {
   items: CartItem[];
   itemCount: number;
@@ -104,20 +100,17 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | undefined>(undefined);
 
 // ---------------------------------------------------------------------------
-// Firestore persistence helpers
+// Firestore persistence
 // ---------------------------------------------------------------------------
 
 // Cart documents are stored at /carts/{userId} in Firestore.
 const cartDocRef = (uid: string) => doc(db, 'carts', uid);
 
-// We serialize CartItem[] to a plain structure for Firestore storage because
+// CartItem[] to a plain structure for Firestore storage because
 // Firestore does not understand class instances.
 const serializeCart = (items: CartItem[]) =>
   items.map((i) => ({ product: { ...i.product }, quantity: i.quantity }));
 
-// ---------------------------------------------------------------------------
-// Provider
-// ---------------------------------------------------------------------------
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });

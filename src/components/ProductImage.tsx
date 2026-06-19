@@ -1,6 +1,6 @@
 /**
  * ProductImage — renders a coloured placeholder image for a product.
- * Replace with real <Image> components once product photography is available.
+ * Replace with real <Image> components once I can be bothered t oget images
  * The colour is derived from the category so each category has a consistent look.
  */
 
