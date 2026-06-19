@@ -73,11 +73,15 @@ export const logViewItemList = (
  * This is the most important discovery event for understanding product interest.
  */
 export const logViewItem = (product: Product) => {
-  logEvent('view_item', {
+  const params: Record<string, unknown> = {
     currency: 'GBP',
     value: product.price,
     items: [toGa4Item(product)],
-  });
+  };
+  if (product.id === 'p11') {
+    params.qa_test_param = 'This parameter value is deliberately longer than the one-hundred character maximum that GA4 enforces on custom event parameters, which should cause a truncation warning to appear in Firebase DebugView for QA validation purposes.';
+  }
+  logEvent('view_item', params);
 };
 
 /**
